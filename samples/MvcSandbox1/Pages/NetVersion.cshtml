@@ -1,0 +1,97 @@
+﻿@page
+@using System
+@using System.Reflection
+@using System.Runtime.Versioning
+
+@model TestModel
+@{
+
+    ViewData["Title"] = ".NET Version";
+    var framework = Assembly.GetEntryAssembly()?.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName ?? "";
+    Assembly[] asm = AppDomain.CurrentDomain.GetAssemblies();
+
+    var media = "@media";
+}
+
+@functions {
+    [TempData]
+    public string Message { get; set; }
+}
+
+<style>
+    @media (min-width:768px)    {.container{width:750px}
+    }
+    @media (min-width:992px)    {.container{width:970px}
+    }
+    @media (min-width:1400px)   {.container{width:1470px}
+    }
+
+    .header {
+        clear: both;
+    }
+    .flex {
+        text-align: left;
+        align: left;
+        display: flex;
+        flex-wrap: wrap;
+        width: 110em;
+        border: solid 1px silver;
+    }
+
+    .flex > div {
+        flex-grow: 1;
+        border: solid 1px silver;
+        padding: 0.5em;
+    }
+
+    .flex > div:nth-of-type(odd) {
+        width: 30%;
+    }
+    .flex .one {
+        width: 40em;
+        background: #F0F0F0;
+    }
+    .flex > div:nth-of-type(even) {
+        width: 60%;
+        text-align: left;
+    }
+</style>
+
+<div class="row" style="margin-top: 5em; width: 100%; min-width: 101em;">
+    
+    <div class="col-md-3">
+        <h2>Hello @Model.Name!</h2>
+        @{
+            Message = $"DateTime.Now: {DateTime.Now}.";
+        }
+        Flex: <a href="http://geniuscarrier.com/2-columns-layout-with-flexbox/">2-columns-layout-with-flexbox</a>
+    </div>
+    <br />
+    
+    <div class="table">
+        <div class="header">
+            Framework=@framework
+            AppDomain.CurrentDomain.GetAssemblies:
+        </div>
+
+        <div class="flex">
+            <div class="one">
+                FullName
+            </div>
+            <div>
+                Location
+            </div>
+      
+            @foreach (Assembly item in asm) {
+                if (!item.IsDynamic) {
+                    <div class="one">
+                        @item.FullName
+                    </div>
+                    <div>
+                        @item.Location
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

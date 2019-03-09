@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 15.0.26730.03
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0EF45656-B25D-40D8-959C-726EAF185E60}"
 	ProjectSection(SolutionItems) = preProject
 		src\Servers\IIS\.editorconfig = src\Servers\IIS\.editorconfig
-		src\Servers\IIS\Directory.Build.props = src\Servers\IIS\Directory.Build.props
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
 		korebuild.json = korebuild.json
@@ -26,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{7E80C58E
 		src\Servers\IIS\build\assets.props = src\Servers\IIS\build\assets.props
 		src\Servers\IIS\build\Build.Settings = src\Servers\IIS\build\Build.Settings
 		src\Servers\IIS\build\Config.Definitions.Props = src\Servers\IIS\build\Config.Definitions.Props
+		build\dependencies.props = build\dependencies.props
 		global.json = global.json
 		src\Servers\IIS\build\Key.snk = src\Servers\IIS\build\Key.snk
 		src\Servers\IIS\build\launchSettings.json = src\Servers\IIS\build\launchSettings.json
@@ -107,7 +107,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Server
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Hosting.WindowsServices", "src\Hosting\WindowsServices\src\Microsoft.AspNetCore.Hosting.WindowsServices.csproj", "{A07CFEF6-76F6-4B65-8D1C-4A64C0868E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NativeIISSample1", "samples\NativeIISSample1\NativeIISSample1.csproj", "{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NativeIISSample1", "samples\NativeIISSample1\NativeIISSample1.csproj", "{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcSandbox", "src\Mvc\samples\MvcSandbox\MvcSandbox.csproj", "{E629679D-6484-452B-A60F-6C77F2365BBF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Diagnostics", "src\Middleware\Diagnostics\src\Microsoft.AspNetCore.Diagnostics.csproj", "{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.StaticFiles", "src\Middleware\StaticFiles\src\Microsoft.AspNetCore.StaticFiles.csproj", "{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -170,9 +176,11 @@ Global
 		{1533E271-F61B-441B-8B74-59FB61DF0552}.Release|x64.ActiveCfg = Release|x64
 		{1533E271-F61B-441B-8B74-59FB61DF0552}.Release|x64.Build.0 = Release|x64
 		{BACB6E5C-A4DB-4513-B9DD-8FEC752585F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BACB6E5C-A4DB-4513-B9DD-8FEC752585F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BACB6E5C-A4DB-4513-B9DD-8FEC752585F0}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{BACB6E5C-A4DB-4513-B9DD-8FEC752585F0}.Debug|x64.Build.0 = Debug|Any CPU
 		{BACB6E5C-A4DB-4513-B9DD-8FEC752585F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BACB6E5C-A4DB-4513-B9DD-8FEC752585F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BACB6E5C-A4DB-4513-B9DD-8FEC752585F0}.Release|x64.ActiveCfg = Release|Any CPU
 		{BACB6E5C-A4DB-4513-B9DD-8FEC752585F0}.Release|x64.Build.0 = Release|Any CPU
 		{2C720685-FBE2-4450-9A01-CAA327D3485A}.Debug|Any CPU.ActiveCfg = Debug|x64
@@ -300,13 +308,35 @@ Global
 		{A07CFEF6-76F6-4B65-8D1C-4A64C0868E6F}.Release|x64.ActiveCfg = Release|Any CPU
 		{A07CFEF6-76F6-4B65-8D1C-4A64C0868E6F}.Release|x64.Build.0 = Release|Any CPU
 		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}.Debug|Any CPU.Build.0 = Debug|x64
 		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}.Debug|x64.ActiveCfg = Debug|x64
 		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}.Debug|x64.Build.0 = Debug|x64
 		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}.Release|Any CPU.ActiveCfg = Release|x64
-		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}.Release|Any CPU.Build.0 = Release|x64
 		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}.Release|x64.ActiveCfg = Release|x64
 		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1}.Release|x64.Build.0 = Release|x64
+		{E629679D-6484-452B-A60F-6C77F2365BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E629679D-6484-452B-A60F-6C77F2365BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E629679D-6484-452B-A60F-6C77F2365BBF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E629679D-6484-452B-A60F-6C77F2365BBF}.Debug|x64.Build.0 = Debug|Any CPU
+		{E629679D-6484-452B-A60F-6C77F2365BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E629679D-6484-452B-A60F-6C77F2365BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E629679D-6484-452B-A60F-6C77F2365BBF}.Release|x64.ActiveCfg = Release|Any CPU
+		{E629679D-6484-452B-A60F-6C77F2365BBF}.Release|x64.Build.0 = Release|Any CPU
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}.Debug|x64.Build.0 = Debug|Any CPU
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}.Release|x64.ActiveCfg = Release|Any CPU
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286}.Release|x64.Build.0 = Release|Any CPU
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}.Debug|x64.Build.0 = Debug|Any CPU
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}.Release|x64.ActiveCfg = Release|Any CPU
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -341,6 +371,9 @@ Global
 		{A0365AE5-6A67-4E9D-BE57-2F391F6F3BBC} = {8446E0D1-F421-4FD2-8B49-9183CCABD9D3}
 		{A07CFEF6-76F6-4B65-8D1C-4A64C0868E6F} = {8446E0D1-F421-4FD2-8B49-9183CCABD9D3}
 		{5E6B1122-0735-4C45-B4A4-22CC23DB44F1} = {F10CFC80-ED34-4B58-9A29-0E915A2FFFF3}
+		{E629679D-6484-452B-A60F-6C77F2365BBF} = {F10CFC80-ED34-4B58-9A29-0E915A2FFFF3}
+		{35FC109F-E97B-4BD9-823F-6ECCE9AC7286} = {8E03138E-100D-46C7-ADCE-DAC054135825}
+		{9F00388E-9A53-4FBF-BA4C-CD55B72A0B51} = {8E03138E-100D-46C7-ADCE-DAC054135825}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DB4F868D-E1AE-4FD7-9333-69FA15B268C5}

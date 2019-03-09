@@ -42,91 +42,97 @@ namespace IISSample
 
         public void Configure(
             IApplicationBuilder app, ILoggerFactory loggerfactory)
-            // IAuthenticationSchemeProvider authSchemeProvider)
+        // IAuthenticationSchemeProvider authSchemeProvider)
         {
             Instance = this;
-            var logger = loggerfactory.CreateLogger("Requests");
+            ILogger logger = loggerfactory.CreateLogger("Requests");
 
             var domain = AppDomain.CurrentDomain;
-            var asm = domain.GetAssemblies();  // AppDomain.CurrentDomain.GetAssemblies
+            Assembly[] asm = domain.GetAssemblies();  // AppDomain.CurrentDomain.GetAssemblies
 
-            app.Run(async (context) => {
-                logger.LogDebug("Received request: " + context.Request.Method + " " + context.Request.Path);
+            app.Run(async (context)
+                => await WebInfo(context, app, logger, asm));
+        }
 
-                context.Response.ContentType = "text/html";
-                var ln = Environment.NewLine.ToString();
-                var br = $"<br/>{ln}";
+        public async Task WebInfo(HttpContext context, IApplicationBuilder app, ILogger logger, Assembly[] asm)
+        {
+            logger.LogDebug("Received request: " + context.Request.Method + " " + context.Request.Path);
 
-                await context.Response.WriteAsync($"<html><body>{ln}");
+            context.Response.ContentType = "text/html";
+            var ln = Environment.NewLine.ToString();
+            var br = $"<br/>{ln}";
+            await context.Response.WriteAsync($"<html><body>{ln}");
 
+            await context.Response.WriteAsync($"Hello World AspNetCore - {DateTimeOffset.Now} {br}");
+            await context.Response.WriteAsync(br);
 
-                await context.Response.WriteAsync($"Hello World AspNetCore - {DateTimeOffset.Now} {br}");
-                await context.Response.WriteAsync(br);
+            await Ports(context);
 
-                await context.Response.WriteAsync("Address:" + Environment.NewLine);
-                await context.Response.WriteAsync("Scheme: " + context.Request.Scheme + Environment.NewLine);
-                await context.Response.WriteAsync("Host: " + context.Request.Headers["Host"] + Environment.NewLine);
-                await context.Response.WriteAsync("PathBase: " + context.Request.PathBase.Value + Environment.NewLine);
-                await context.Response.WriteAsync("Path: " + context.Request.Path.Value + Environment.NewLine);
-                await context.Response.WriteAsync("Query: " + context.Request.QueryString.Value + Environment.NewLine);
-                await context.Response.WriteAsync(Environment.NewLine);
-
-                await context.Response.WriteAsync("Connection:" + Environment.NewLine);
-                await context.Response.WriteAsync("RemoteIp: " + context.Connection.RemoteIpAddress + Environment.NewLine);
-                await context.Response.WriteAsync("RemotePort: " + context.Connection.RemotePort + Environment.NewLine);
-                await context.Response.WriteAsync("LocalIp: " + context.Connection.LocalIpAddress + Environment.NewLine);
-                await context.Response.WriteAsync("LocalPort: " + context.Connection.LocalPort + Environment.NewLine);
-                await context.Response.WriteAsync("ClientCert: " + context.Connection.ClientCertificate + Environment.NewLine);
-                await context.Response.WriteAsync(Environment.NewLine);
-
-                await context.Response.WriteAsync("User: " + context.User.Identity.Name + Environment.NewLine);
-
-                var authSchemeProvider = app.ApplicationServices.GetService<IAuthenticationSchemeProvider>();
-                if (authSchemeProvider != null) {
-                    var scheme = await authSchemeProvider.GetSchemeAsync(IISDefaults.AuthenticationScheme);
-
-                    await context.Response.WriteAsync("DisplayName: " + scheme?.DisplayName + Environment.NewLine);
-                }
-                else {
-                    await context.Response.WriteAsync("No IAuthenticationSchemeProvider");
-                }
-                await context.Response.WriteAsync(Environment.NewLine);
-
-                await context.Response.WriteAsync("Headers:" + Environment.NewLine);
-                foreach (var header in context.Request.Headers) {
-                    await context.Response.WriteAsync(header.Key + ": " + header.Value + Environment.NewLine);
-                }
-                await context.Response.WriteAsync(Environment.NewLine);
-
-                await context.Response.WriteAsync($"AppDomain.CurrentDomain.GetAssemblies: {br}");
-                await context.Response.WriteAsync($"<table><tr><th>FullName</th><th>Location</th></tr> {ln}");
-                foreach (Assembly item in asm) {
-                    if (!item.IsDynamic) {
-                        // await context.Response.WriteAsync($"{item.FullName} : {item.Location} {br}");
-                        await context.Response.WriteAsync(
-                            $@"<tr>
+            await context.Response.WriteAsync($"AppDomain.CurrentDomain.GetAssemblies: {br}");
+            await context.Response.WriteAsync($"<table><tr><th>FullName</th><th>Location</th></tr> {ln}");
+            foreach (Assembly item in asm) {
+                if (!item.IsDynamic) {
+                    await context.Response.WriteAsync(
+                        $@"<tr>
                                     <td> {item.FullName} </td>
                                     <td> {item.Location} </td>
                                 </tr>{ln}");
-                    }
                 }
-                await context.Response.WriteAsync("</table> {br}");
+            }
+            await context.Response.WriteAsync("</table> {br}");
 
-                await context.Response.WriteAsync("Environment Variables:" + Environment.NewLine);
-                var vars = Environment.GetEnvironmentVariables();
-                foreach (var key in vars.Keys.Cast<string>().OrderBy(key => key, StringComparer.OrdinalIgnoreCase)) {
-                    var value = vars[key];
-                    await context.Response.WriteAsync($"{key} : {value} {br}");
-                }
+            var authSchemeProvider = app.ApplicationServices.GetService<IAuthenticationSchemeProvider>();
+            if (authSchemeProvider != null) {
+                var scheme = await authSchemeProvider.GetSchemeAsync(IISDefaults.AuthenticationScheme);
 
-                await context.Response.WriteAsync(Environment.NewLine);
-                if (context.Features.Get<IHttpUpgradeFeature>() != null) {
-                    await context.Response.WriteAsync("Websocket feature is enabled.");
-                }
-                else {
-                    await context.Response.WriteAsync("Websocket feature is disabled.");
-                }
-            });
+                await context.Response.WriteAsync("DisplayName: " + scheme?.DisplayName + Environment.NewLine);
+            }
+            else {
+                await context.Response.WriteAsync("No IAuthenticationSchemeProvider");
+            }
+            await context.Response.WriteAsync(Environment.NewLine);
+
+            await context.Response.WriteAsync("Environment Variables:" + Environment.NewLine);
+            var vars = Environment.GetEnvironmentVariables();
+            foreach (var key in vars.Keys.Cast<string>().OrderBy(key => key, StringComparer.OrdinalIgnoreCase)) {
+                var value = vars[key];
+                await context.Response.WriteAsync($"{key} : {value} {br}");
+            }
+
+            await context.Response.WriteAsync(Environment.NewLine);
+            if (context.Features.Get<IHttpUpgradeFeature>() != null) {
+                await context.Response.WriteAsync("Websocket feature is enabled.");
+            }
+            else {
+                await context.Response.WriteAsync("Websocket feature is disabled.");
+            }
+        }
+
+        public async Task Ports(HttpContext context)
+        {
+            await context.Response.WriteAsync("Address:" + Environment.NewLine);
+            await context.Response.WriteAsync("Scheme: " + context.Request.Scheme + Environment.NewLine);
+            await context.Response.WriteAsync("Host: " + context.Request.Headers["Host"] + Environment.NewLine);
+            await context.Response.WriteAsync("PathBase: " + context.Request.PathBase.Value + Environment.NewLine);
+            await context.Response.WriteAsync("Path: " + context.Request.Path.Value + Environment.NewLine);
+            await context.Response.WriteAsync("Query: " + context.Request.QueryString.Value + Environment.NewLine);
+            await context.Response.WriteAsync(Environment.NewLine);
+
+            await context.Response.WriteAsync("Connection:" + Environment.NewLine);
+            await context.Response.WriteAsync("RemoteIp: " + context.Connection.RemoteIpAddress + Environment.NewLine);
+            await context.Response.WriteAsync("RemotePort: " + context.Connection.RemotePort + Environment.NewLine);
+            await context.Response.WriteAsync("LocalIp: " + context.Connection.LocalIpAddress + Environment.NewLine);
+            await context.Response.WriteAsync("LocalPort: " + context.Connection.LocalPort + Environment.NewLine);
+            await context.Response.WriteAsync("ClientCert: " + context.Connection.ClientCertificate + Environment.NewLine);
+            await context.Response.WriteAsync(Environment.NewLine);
+
+            await context.Response.WriteAsync("User: " + context.User.Identity.Name + Environment.NewLine);
+
+            await context.Response.WriteAsync("Headers:" + Environment.NewLine);
+            foreach (var header in context.Request.Headers) {
+                await context.Response.WriteAsync(header.Key + ": " + header.Value + Environment.NewLine);
+            }
+            await context.Response.WriteAsync(Environment.NewLine);
         }
 
         public static int Port;

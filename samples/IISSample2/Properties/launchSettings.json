@@ -4,6 +4,14 @@
     "anonymousAuthentication": true
   },
   "profiles": {
+    "dotnet": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5000/"
+    },
     "IISSample2": {
       "commandName": "Executable",
       "executablePath": "dotnet",
@@ -14,12 +22,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:62975/"
-    },
-    "dotnet": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
     }
+
   }
 }
