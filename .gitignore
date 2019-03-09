@@ -27,3 +27,6 @@ scripts/tmp/
 korebuild-lock.txt
 .gradle/
 src/SignalR/clients/**/dist/
+
+src/Components/Blazor/testassets/
+src/SignalR/
