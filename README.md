@@ -1,5 +1,35 @@
-ASP.NET Core
-============
+### fork of RELEASE 2.2
+
+Installing
+```
+./build.cmd
+dotnet-install: 
+Downloading link: https://dotnetcli.azureedge.net/dotnet/Sdk/2.2.102/dotnet-sdk-2.2.102-win-x64.zip
+
+ Restoring packages for E:\Beta\dot64\AspNetCore\src\Tools\dotnet-watch\src\dotnet-watch.csproj...
+  Installing Microsoft.NETCore.DotNetAppHost 2.2.3.
+  Installing Microsoft.NETCore.DotNetHostResolver 2.2.3.
+  Installing Microsoft.NETCore.DotNetHostPolicy 2.2.3.
+  Installing Microsoft.AspNetCore.BuildTools.ApiCheck 2.2.1-build-20190110.1.
+  Installing Microsoft.NETCore.App 2.2.3.
+  Installing Microsoft.Extensions.CommandLineUtils.Sources 2.2.0.
+  Installing Internal.AspNetCore.Sdk 2.2.1-build-20190110.1.
+  Installing runtime.win-x86.Microsoft.NETCore.DotNetAppHost 2.2.3.
+  Installing runtime.win-x86.Microsoft.NETCore.DotNetHostResolver 2.2.3.
+  Installing runtime.win-x86.Microsoft.NETCore.DotNetHostPolicy 2.2.3.
+  Installing runtime.win-x86.Microsoft.NETCore.App 2.2.3.
+  Installing runtime.win-x64.Microsoft.NETCore.DotNetAppHost 2.2.3.
+  Installing runtime.win-x64.Microsoft.NETCore.DotNetHostResolver 2.2.3.
+  Installing runtime.win-x64.Microsoft.NETCore.App 2.2.3.
+  Installing runtime.win-x64.Microsoft.NETCore.DotNetHostPolicy 2.2.3.
+  Generating MSBuild file E:\Beta\dot64\AspNetCore\obj\dotnet-watch\dotnet-watch.csproj.nuget.g.props.
+  Generating MSBuild file E:\Beta\dot64\AspNetCore\obj\dotnet-watch\dotnet-watch.csproj.nuget.g.targets.
+  Restore completed in 35.43 sec for E:\Beta\dot64\AspNetCore\src\Tools\dotnet-watch\src\dotnet-watch.csproj.
+PS E:\Beta\dot64\AspNetCore\src\Tools\dotnet-watch\src>
+
+```
+
+# ASP.NET Core
 
 ASP.NET Core is an open-source and cross-platform framework for building modern cloud based internet connected applications, such as web apps, IoT apps and mobile backends. ASP.NET Core apps can run on .NET Core or on the full .NET Framework. It was architected to provide an optimized development framework for apps that are deployed to the cloud or run on-premises. It consists of modular components with minimal overhead, so you retain flexibility while constructing your solutions. You can develop and run your ASP.NET Core apps cross-platform on Windows, Mac and Linux. [Learn more about ASP.NET Core](https://docs.microsoft.com/aspnet/core/).
 

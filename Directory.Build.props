@@ -25,7 +25,7 @@
 
     <PackageIconUrl>https://go.microsoft.com/fwlink/?LinkID=288859</PackageIconUrl>
     <PackageProjectUrl>https://asp.net</PackageProjectUrl>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+
     <Serviceable>true</Serviceable>
 
     <RepositoryRoot>$(MSBuildThisFileDirectory)</RepositoryRoot>
@@ -40,7 +40,11 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)eng\AspNetCore.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
+    <!-- dirty work arrounds for netcore 2.2 -->
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <NETStandardMaximumVersionExclusive>2.2</NETStandardMaximumVersionExclusive>
 
     <!-- Instructs the compiler to use SHA256 instead of SHA1 when adding file hashes to PDBs. -->
     <ChecksumAlgorithm>SHA256</ChecksumAlgorithm>
@@ -81,7 +85,8 @@
     <IsTestAssetProject Condition="$(RepoRelativeProjectDir.Contains('testassets'))">true</IsTestAssetProject>
     <IsSampleProject Condition="$(RepoRelativeProjectDir.Contains('sample'))">true</IsSampleProject>
 
-    <IncludeSource>false</IncludeSource>
+    <!--<IncludeSource>false</IncludeSource>-->
+    <IncludeSource>true</IncludeSource>
     <IncludeSymbols>true</IncludeSymbols>
 
     <SharedSourceRoot>$(MSBuildThisFileDirectory)src\Shared\</SharedSourceRoot>

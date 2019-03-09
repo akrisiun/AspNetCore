@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -11,6 +11,9 @@
     <PackNativeAssets Condition="'$(OS)' == 'Windows_NT'">true</PackNativeAssets>
     <NativeAssetsTargetFramework>netcoreapp2.2</NativeAssetsTargetFramework>
     <DisableFastUpToDateCheck>True</DisableFastUpToDateCheck>
+
+    <!-- dirty work arrounds for netcore 2.2 -->
+    <NETStandardMaximumVersionExclusive>2.2</NETStandardMaximumVersionExclusive>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,13 +22,14 @@
     <Content Include="$(PackageId).targets" PackagePath="build/$(TargetFramework)/" />
   </ItemGroup>
 
-  <Target Name="ValidateNativeComponentsBuilt" AfterTargets="Build" >
-    <Error Text="Required dll from ANCM has not been built. To build ANCM, you must use MSBuild.exe."
-        Condition="'$(OS)' == 'Windows_NT' AND !Exists('$(AspNetCoreModuleV2InProcessHandlerDll)')" />
+  <Target Name="ValidateNativeComponentsBuilt" AfterTargets="Build">
+    <!--<Error Text="Required dll from ANCM has not been built. To build ANCM, you must use MSBuild.exe."
+           Condition="'$(OS)' == 'Windows_NT' AND !Exists('$(AspNetCoreModuleV2InProcessHandlerDll)')" />-->
   </Target>
 
   <ItemGroup Condition="'$(OS)' == 'Windows_NT' AND '$(VCTargetsPath)' != ''">
-    <NativeProjectReference Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\InProcessRequestHandler\InProcessRequestHandler.vcxproj" />
+    <!--<NativeProjectReference
+      Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\InProcessRequestHandler\InProcessRequestHandler.vcxproj" />-->
   </ItemGroup>
 
   <ItemGroup>
@@ -38,15 +42,25 @@
 
   <Import Project="..\..\build\assets.props" />
 
-  <Target Name="AddPackNativeComponents" BeforeTargets="_GetPackageFiles;GetSignedPackageFiles" Condition="$(PackNativeAssets) == 'true'">
+  <Target Name="AddPackNativeComponents" BeforeTargets="_GetPackageFiles;GetSignedPackageFiles"
+          Condition="$(PackNativeAssets) == 'true'">
     <ItemGroup>
-      <None Include="%(InProcessComponents.DllLocation)" Pack="true" PackagePath="runtimes/win-%(InProcessComponents.Platform)/nativeassets/$(NativeAssetsTargetFramework)" />
+      <None Include="%(InProcessComponents.DllLocation)" Pack="true"
+            PackagePath="runtimes/win-%(InProcessComponents.Platform)/nativeassets/$(NativeAssetsTargetFramework)" />
     </ItemGroup>
   </Target>
 
   <Target Name="AddRunNativeComponents" BeforeTargets="AssignTargetPaths" Condition="$(PackNativeAssets) == 'true'">
     <ItemGroup>
-      <None Include="%(InProcessComponents.DllLocation)" CopyToOutputDirectory="PreserveNewest" Link="%(InProcessComponents.Platform)\%(InProcessComponents.NativeAsset).dll" />
+      <None Include="%(InProcessComponents.DllLocation)" CopyToOutputDirectory="PreserveNewest"
+            Link="%(InProcessComponents.Platform)\%(InProcessComponents.NativeAsset).dll" />
     </ItemGroup>
   </Target>
+
+  <ItemGroup>
+    <!--<ProjectReference
+      Update="E:\Beta\dot64\AspNetCore\src\Servers\IIS\AspNetCoreModuleV2\InProcessRequestHandler\InProcessRequestHandler.vcxproj">
+      <Private>true</Private>
+    </ProjectReference>-->
+  </ItemGroup>
 </Project>

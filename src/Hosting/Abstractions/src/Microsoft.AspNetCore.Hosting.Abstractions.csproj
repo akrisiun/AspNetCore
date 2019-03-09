@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>ASP.NET Core hosting and startup abstractions for web applications.</Description>
@@ -6,6 +6,9 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>aspnetcore;hosting</PackageTags>
+
+    <!-- dirty work arrounds for netcore 2.2 -->
+    <NETStandardMaximumVersionExclusive>2.2</NETStandardMaximumVersionExclusive>
   </PropertyGroup>
 
   <ItemGroup>
