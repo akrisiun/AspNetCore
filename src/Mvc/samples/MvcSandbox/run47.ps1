@@ -1,0 +1,1 @@
+dotnet run -f net471
