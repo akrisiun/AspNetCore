@@ -1,23 +1,22 @@
-﻿@page
+@page
 @using System
 @using System.Reflection
+@using System.Linq
 @using System.Runtime.Versioning
-
 @model TestModel
 @{
 
     ViewData["Title"] = ".NET Version";
     var framework = Assembly.GetEntryAssembly()?.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName ?? "";
-    Assembly[] asm = AppDomain.CurrentDomain.GetAssemblies();
+    Assembly[] asm1 = AppDomain.CurrentDomain.GetAssemblies();
+    var asm = asm1.Where(i => !i.IsDynamic).OrderBy(i => i.Location);
 
     var media = "@media";
 }
-
 @functions {
-    [TempData]
-    public string Message { get; set; }
+[TempData]
+public string Message { get; set; }
 }
-
 <style>
     @media (min-width:768px)    {.container{width:750px}
     }
@@ -56,9 +55,8 @@
         text-align: left;
     }
 </style>
-
 <div class="row" style="margin-top: 5em; width: 100%; min-width: 101em;">
-    
+
     <div class="col-md-3">
         <h2>Hello @Model.Name!</h2>
         @{
@@ -67,13 +65,12 @@
         Flex: <a href="http://geniuscarrier.com/2-columns-layout-with-flexbox/">2-columns-layout-with-flexbox</a>
     </div>
     <br />
-    
+
     <div class="table">
         <div class="header">
             Framework=@framework
             AppDomain.CurrentDomain.GetAssemblies:
         </div>
-
         <div class="flex">
             <div class="one">
                 FullName
@@ -81,7 +78,7 @@
             <div>
                 Location
             </div>
-      
+
             @foreach (Assembly item in asm) {
                 if (!item.IsDynamic) {
                     <div class="one">

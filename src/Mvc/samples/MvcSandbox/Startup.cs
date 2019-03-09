@@ -32,7 +32,10 @@ namespace MvcSandbox
 
         public static void Main(string[] args)
         {
+			var Port = 5050;
+			//  64101
             var host = CreateWebHostBuilder(args)
+                .UseUrls($"http://0.0.0.0:{Port}")
                 .Build();
 
             host.Run();

@@ -104,14 +104,10 @@
   </PropertyGroup>
 
   <Target Name="PostBuildTask" AfterTargets="Build">
-    <Message Importance="High" Text="TargetFramework= $(TargetFramework) PackageBrandingVersion = $(PackageBrandingVersion)" />
-    <!--$(TargetFrameworkIdentifier)' != '.NETFramework'"-->
+    <!-- <Message Importance="High" Text="TargetFramework= $(TargetFramework) PackageBrandingVersion = $(PackageBrandingVersion)" />
+    $(TargetFrameworkIdentifier)' != '.NETFramework'"-->
 
-    <Message Importance="High" Text="MicrosoftNETCoreAppPackageVersion Microsoft.NETCore.App= $(MicrosoftNETCoreAppPackageVersion) in dependencies.props" />
-    <!--
-    <MicrosoftNETCoreAppPackageVersion>2.2.1</MicrosoftNETCoreAppPackageVersion>
-    <MicrosoftNETCoreDotNetAppHostPackageVersion>2.2.1</MicrosoftNETCoreDotNetAppHostPackageVersion>
-    -->
+    <Message Importance="High" Text="TargetFramework= $(TargetFramework) MicrosoftNETCoreAppPackageVersion Microsoft.NETCore.App= $(MicrosoftNETCoreAppPackageVersion) in dependencies.props" />
   </Target>
 
   <Import Project="eng\Dependencies.props" />

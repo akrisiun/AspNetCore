@@ -9,8 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.JSInterop" />
-    <Reference Include="System.ComponentModel.Annotations" />
+    <!-- <Reference Include="Microsoft.JSInterop" />
+ 	     <Reference Include="System.ComponentModel.Annotations" />
+	-->
+    <PackageReference Include="Microsoft.JSInterop" Version="0.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+
   </ItemGroup>
 
 </Project>
