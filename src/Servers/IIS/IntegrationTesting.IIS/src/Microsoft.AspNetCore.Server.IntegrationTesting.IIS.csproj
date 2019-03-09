@@ -20,16 +20,16 @@
   </ItemGroup>
 
   <Target Name="ValidateNativeComponentsBuilt" AfterTargets="Build" Condition="'$(OS)' == 'Windows_NT'">
-    <Error Text="Required dll from ANCM has not been built. To build ANCM, you must use MSBuild.exe."
-          Condition="!Exists('$(AspNetCoreModuleV1ShimDll)')
-            OR !Exists('$(AspNetCoreModuleV2ShimDll)')
-            OR !Exists('$(AspNetCoreModuleV2OutOfProcessHandlerDll)')" />
+    <Error Text="Required dll $(AspNetCoreModuleV2ShimDll) from ANCM has not been built. To build ANCM, you must use MSBuild.exe."
+          Condition="!Exists('$(AspNetCoreModuleV2ShimDll)')
+                  OR !Exists('$(AspNetCoreModuleV2OutOfProcessHandlerDll)')" />
+			
   </Target>
 
   <ItemGroup Condition="'$(OS)' == 'Windows_NT' AND '$(VCTargetsPath)' != ''">
-    <NativeProjectReference Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV1\AspNetCore\AspNetCore.vcxproj" />
-    <NativeProjectReference Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\AspNetCore\AspNetCore.vcxproj" />
-    <NativeProjectReference Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV2\OutOfProcessRequestHandler\OutOfProcessRequestHandler.vcxproj" HandlerPath="2.0.0" />
+    <!--<NativeProjectReference Include="$(MSBuildThisFileDirectory)..\..\AspNetCoreModuleV1\AspNetCore\AspNetCore.vcxproj" />-->
+    <NativeProjectReference Include="$(MSBuildThisFileDirectory)..\..\src\AspNetCoreModuleV2\AspNetCore\AspNetCore.vcxproj" />
+    <NativeProjectReference Include="$(MSBuildThisFileDirectory)..\..\src\AspNetCoreModuleV2\OutOfProcessRequestHandler\OutOfProcessRequestHandler.vcxproj" HandlerPath="2.0.0" />
   </ItemGroup>
 
   <Target Name="AddRunNativeComponents" BeforeTargets="AssignTargetPaths" Condition="'$(OS)' == 'Windows_NT'">

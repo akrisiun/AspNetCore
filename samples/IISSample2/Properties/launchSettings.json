@@ -1,0 +1,25 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true
+  },
+  "profiles": {
+    "IISSample2": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "commandLineArgs": "bin\\Debug\\netcoreapp2.2\\",
+      "workingDirectory": "E:\\Beta\\dot64\\AspNetCore\\samples\\IISSample2",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:62975/"
+    },
+    "dotnet": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

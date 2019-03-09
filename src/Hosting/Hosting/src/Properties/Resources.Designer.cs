@@ -5,7 +5,7 @@ namespace Microsoft.AspNetCore.Hosting
     using System.Reflection;
     using System.Resources;
 
-    internal static class Resources
+    internal partial class Resources
     {
         private static readonly ResourceManager _resourceManager
             = new ResourceManager("Microsoft.AspNetCore.Hosting.Resources", typeof(Resources).GetTypeInfo().Assembly);

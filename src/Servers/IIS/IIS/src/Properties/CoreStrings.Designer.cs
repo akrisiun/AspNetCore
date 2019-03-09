@@ -5,7 +5,7 @@ namespace Microsoft.AspNetCore.Server.IIS
     using System.Reflection;
     using System.Resources;
 
-    internal static class CoreStrings
+    internal partial class CoreStrings
     {
         private static readonly ResourceManager _resourceManager
             = new ResourceManager("Microsoft.AspNetCore.Server.IIS.CoreStrings", typeof(CoreStrings).GetTypeInfo().Assembly);

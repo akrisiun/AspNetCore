@@ -1,4 +1,4 @@
-﻿// Copyright (c) .NET Foundation. All rights reserved.
+// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -27,8 +27,9 @@ namespace Microsoft.AspNetCore.Hosting
         private readonly HostingEnvironment _hostingEnvironment;
         private readonly List<Action<WebHostBuilderContext, IServiceCollection>> _configureServicesDelegates;
 
-        private IConfiguration _config;
-        private WebHostOptions _options;
+        protected IConfiguration _config;
+        protected WebHostOptions _options;
+
         private WebHostBuilderContext _context;
         private bool _webHostBuilt;
         private List<Action<WebHostBuilderContext, IConfigurationBuilder>> _configureAppConfigurationBuilderDelegates;
@@ -143,7 +144,7 @@ namespace Microsoft.AspNetCore.Hosting
         /// <summary>
         /// Builds the required services and an <see cref="IWebHost"/> which hosts a web application.
         /// </summary>
-        public IWebHost Build()
+        public virtual IWebHost Build()
         {
             if (_webHostBuilt)
             {

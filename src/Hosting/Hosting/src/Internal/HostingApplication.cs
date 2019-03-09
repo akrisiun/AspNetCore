@@ -13,8 +13,13 @@ namespace Microsoft.AspNetCore.Hosting.Internal
 {
     public class HostingApplication : IHttpApplication<HostingApplication.Context>
     {
-        private readonly RequestDelegate _application;
-        private readonly IHttpContextFactory _httpContextFactory;
+        static HostingApplication()
+        {
+
+        }
+
+        protected readonly RequestDelegate _application;
+        protected readonly IHttpContextFactory _httpContextFactory;
         private HostingApplicationDiagnostics _diagnostics;
 
         public HostingApplication(
@@ -29,7 +34,7 @@ namespace Microsoft.AspNetCore.Hosting.Internal
         }
 
         // Set up the request
-        public Context CreateContext(IFeatureCollection contextFeatures)
+        public virtual Context CreateContext(IFeatureCollection contextFeatures)
         {
             var context = new Context();
             var httpContext = _httpContextFactory.Create(contextFeatures);
@@ -41,13 +46,13 @@ namespace Microsoft.AspNetCore.Hosting.Internal
         }
 
         // Execute the request
-        public Task ProcessRequestAsync(Context context)
+        public virtual Task  ProcessRequestAsync(Context context)
         {
             return _application(context.HttpContext);
         }
 
         // Clean up the request
-        public void DisposeContext(Context context, Exception exception)
+        public virtual void DisposeContext(Context context, Exception exception)
         {
             var httpContext = context.HttpContext;
             _diagnostics.RequestEnd(httpContext, exception, context);

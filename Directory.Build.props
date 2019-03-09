@@ -99,7 +99,14 @@
   <PropertyGroup>
     <!-- Projects which reference Microsoft.AspNetCore.Mvc.Testing should import this targets file to ensure dependency .deps.json files are copied into test output. -->
     <MvcTestingTargets>$(MSBuildThisFileDirectory)src\Mvc\Mvc.Testing\src\build\netstandard2.0\Microsoft.AspNetCore.Mvc.Testing.targets</MvcTestingTargets>
+
+
   </PropertyGroup>
+
+  <Target Name="PostBuildTask" AfterTargets="Build">
+    <Message Importance="High" Text="TargetFramework= $(TargetFramework) PackageBrandingVersion = $(PackageBrandingVersion)" />
+    <!--$(TargetFrameworkIdentifier)' != '.NETFramework'"-->
+  </Target>
 
   <Import Project="eng\Dependencies.props" />
   <Import Project="eng\PatchConfig.props" />

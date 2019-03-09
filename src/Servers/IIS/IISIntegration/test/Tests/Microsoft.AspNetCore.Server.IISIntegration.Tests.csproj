@@ -1,7 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.2;net461</TargetFrameworks>
+
+    <!-- dirty work arrounds for netcore 2.2 -->
+    <NETStandardMaximumVersionExclusive>2.2</NETStandardMaximumVersionExclusive>    
   </PropertyGroup>
 
   <ItemGroup>

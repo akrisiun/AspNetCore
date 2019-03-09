@@ -24,8 +24,6 @@ msbuild.ProjectImports.zip
 scripts/tmp/
 .dotnet/
 .tools/
-src/**/global.json
-launchSettings.json
 korebuild-lock.txt
 .gradle/
 src/SignalR/clients/**/dist/

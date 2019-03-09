@@ -4,7 +4,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <InProcessTestSite>true</InProcessTestSite>
+    <!--<InProcessTestSite>true</InProcessTestSite>-->
+    <InProcessTestSite>false</InProcessTestSite>
+    
     <AspNetCoreHostingModel>inprocess</AspNetCoreHostingModel>
   </PropertyGroup>
 
@@ -12,8 +14,25 @@
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Server.IIS" />
     <Reference Include="Microsoft.AspNetCore.Server.IISIntegration" />
-    <Reference Include="Microsoft.AspNetCore.Server.IntegrationTesting.IIS" />
+
+    <Reference Include="Microsoft.AspNetCore.Server.IntegrationTesting" />
+    <!--<Reference Include="Microsoft.AspNetCore.Server.IntegrationTesting.IIS" />-->
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
+
+    <!--$(TargetFrameworkIdentifier)' != '.NETFramework'"-->
+    <!--<PackageReference Include="Microsoft.NETCore.App" Version="2.2.1" />-->
+    <PackageReference Include="Microsoft.NETCore.App" Version="3.0.0-preview-27308-3" />
+  </ItemGroup>
+  <Target Name="CopyLaunchSettings" AfterTargets="CoreBuild">
+    <!-- This would always override launch settings files in test projects by the default one -->
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)launchSettings.json"
+          DestinationFolder="$(MSBuildProjectDirectory)\Properties" SkipUnchangedFiles="true" />
+  </Target>
+
+  <ItemGroup>
+    <Content Update="launchSettings.json">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -143,7 +143,15 @@ namespace Microsoft.AspNetCore.Hosting.Internal
             _hostedServiceExecutor = _applicationServices.GetRequiredService<HostedServiceExecutor>();
             var diagnosticSource = _applicationServices.GetRequiredService<DiagnosticListener>();
             var httpContextFactory = _applicationServices.GetRequiredService<IHttpContextFactory>();
-            var hostingApp = new HostingApplication(application, _logger, diagnosticSource, httpContextFactory);
+            IHttpApplication<HostingApplication.Context> hostingApp;
+            hostingApp = new HostingApplication(application, _logger, diagnosticSource, httpContextFactory);
+
+            await StartAsyncApp(cancellationToken, hostingApp);
+        }
+
+        public virtual async Task StartAsyncApp(
+            CancellationToken cancellationToken, IHttpApplication<HostingApplication.Context> hostingApp)
+        { 
             await Server.StartAsync(hostingApp, cancellationToken).ConfigureAwait(false);
 
             // Fire IApplicationLifetime.Started

@@ -5,13 +5,13 @@
   "toolsets": {
     "nodejs": {
       "minVersion": "8.0",
-      "required": true
+      "required": false
     },
     "visualstudio": {
       "required": [
         "Windows"
       ],
-      "includePrerelease": true,
+      "includePrerelease": false,
       "versionRange": "[15.8, 16.0)",
       "requiredWorkloads": [
         "Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Win81",
