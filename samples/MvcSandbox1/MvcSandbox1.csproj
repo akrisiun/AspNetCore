@@ -1,0 +1,73 @@
+﻿<Project>
+
+  <Sdk Name="Microsoft.NET.Sdk.Web" />
+  <!--.Web
+    <OutputType>Exe</OutputType>
+  -->
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  	<MicrosoftAspNetCoreMvcRazorVersion>2.1.0</MicrosoftAspNetCoreMvcRazorVersion>
+    <RuntimeIdentifiers>win7-x64</RuntimeIdentifiers>
+    <Platforms>x64</Platforms>
+
+    <NETStandardMaximumVersionExclusive>2.1</NETStandardMaximumVersionExclusive>
+    <NETStandardMinimumersionExclusive>2.0</NETStandardMinimumersionExclusive>
+    <MicrosoftNETCoreAppPackageVersion>2.1.2</MicrosoftNETCoreAppPackageVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RazorCompileOnBuild>true</RazorCompileOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
+	
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IIS" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.1.0" />
+  	<PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.1.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.1.0" />
+
+<!--
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.1.0" />
+-->
+
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.Extensions" Version="$(MicrosoftAspNetCoreMvcRazorVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="$(MicrosoftAspNetCoreMvcRazorVersion)" />
+    
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.0" />
+	  <PackageReference Include="Microsoft.DiaSymReader.Native" Version="1.7.0" />
+
+	<!--  
+	<PackageReference Include="Microsoft.NETCore.App" Version="$(MicrosoftNETCoreAppPackageVersion)" />
+    -->
+  </ItemGroup>
+
+  <Target Name="PostBuildTask" AfterTargets="Build">
+    <Message Importance="High" Text="TargetFramework= $(TargetFramework) PackageBrandingVersion=$(PackageBrandingVersion)" />
+    <Message Importance="High" Text="MicrosoftNETCoreAppPackageVersion Microsoft.NETCore.App=$(MicrosoftNETCoreAppPackageVersion) in dependencies.props" />
+    
+    <Message Importance="High" Text="DestinationFiles='$(TargetDir)\MvcSandbox1.runtimeconfig.json'" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)\MvcSandbox1.runtimeconfig.json" DestinationFiles="$(TargetDir)\NativeIISSample1.runtimeconfig.json" SkipUnchangedFiles="false" />
+  </Target>
+
+</Project>

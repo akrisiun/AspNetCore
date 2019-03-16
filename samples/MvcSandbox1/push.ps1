@@ -1,0 +1,1 @@
+dotc build -o d:\Work_exe\PrekesWeb\iis5008\  -v n

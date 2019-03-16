@@ -31,3 +31,4 @@ src/SignalR/clients/**/dist/
 src/Components/Blazor/testassets/
 src/SignalR/
 *-lock.json
+samples/MvcSandbox1/wwwroot/
